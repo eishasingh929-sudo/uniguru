@@ -20,6 +20,7 @@
   "backend/tests/test_semantic_authority_governance.py::test_semantic_pressure_observability_replay_is_stable",
   "backend/tests/test_semantic_authority_governance.py::test_uncertainty_lineage_reconstruction_is_replay_safe",
   "backend/tests/test_semantic_authority_governance.py::test_weighting_rejects_confidence_inflation_as_legitimacy",
+  "backend/tests/test_tantra_sdk_integration.py::test_tantra_sdk_execution_event_is_emitted_and_schema_compatible",
   "tests/test_curriculum_intelligence.py::TestPhase1VerifiedIngestion::test_curriculum_source_manifest_exists",
   "tests/test_curriculum_intelligence.py::TestPhase1VerifiedIngestion::test_edition_registry_exists",
   "tests/test_curriculum_intelligence.py::TestPhase1VerifiedIngestion::test_ingestion_proof_exists",

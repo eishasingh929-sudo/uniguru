@@ -14,6 +14,8 @@ if str(ROOT.parent) not in sys.path:
     sys.path.insert(0, str(ROOT.parent))
 
 from governance.constitutional_runtime import ConstitutionalCognitionRuntime
+from integrations.bucket_telemetry import BucketTelemetryClient, TelemetryEvent
+from integrations.tantra_sdk_adapter import TantraSdkAdapter
 from memory.constitutional_semantic_memory import stable_hash
 
 DEFAULT_PROOF_DIR = ROOT.parent / "review_packets" / "integration_proof"
@@ -99,6 +101,10 @@ def _write_json(path: Path, payload: Dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=True, sort_keys=True), encoding="utf-8")
 
 
+_bucket_telemetry_client = BucketTelemetryClient()
+_tantra_sdk_adapter = TantraSdkAdapter()
+
+
 def _build_bucket_telemetry(trace_id: str, pipeline_result: Dict[str, Any], proof_dir: Path) -> Dict[str, Any]:
     payload = {
         "event": "ecosystem_runtime_execution",
@@ -114,6 +120,27 @@ def _build_bucket_telemetry(trace_id: str, pipeline_result: Dict[str, Any], proo
     _write_json(bucket_path, payload)
     payload["emitted"] = True
     payload["bucket_path"] = str(bucket_path)
+
+    if _bucket_telemetry_client.enabled and _bucket_telemetry_client.endpoint:
+        payload["live_endpoint"] = _bucket_telemetry_client.endpoint
+        payload["live_emitted"] = _bucket_telemetry_client.emit(
+            TelemetryEvent(
+                event=payload["event"],
+                query_hash=payload["query_hash"],
+                route=payload["route"],
+                verification_status=payload["verification_status"],
+                latency=0.0,
+                caller=None,
+                session_id=None,
+                ontology_reference=payload["ontology_reference"],
+                routing={"route": payload["route"]},
+                decision=payload["decision"],
+            )
+        )
+    else:
+        payload["live_endpoint"] = None
+        payload["live_emitted"] = False
+
     return payload
 
 
@@ -136,6 +163,20 @@ def _build_gc_validation(vijay_validation: Dict[str, Any], pipeline_result: Dict
         "authority_enforced": authority_enforced,
         "canonical_authority_granted": bool(vijay_validation.get("canonical_authority_granted")),
         "governance_note": "Constitutional authority remains read-only and enforcement is preserved through replay-safe hashing.",
+    }
+
+
+def _build_tantra_sdk_contracts(trace_id: str, pipeline_result: Dict[str, Any], query: str) -> Dict[str, Any]:
+    execution_event = _tantra_sdk_adapter.emit_execution_event(
+        trace_id=trace_id,
+        query=query,
+        verification_status=pipeline_result.get("verification_status") or "UNVERIFIED",
+        answer=pipeline_result.get("answer"),
+        domain=(pipeline_result.get("domain_resolution") or {}).get("domain") or "ecosystem",
+        duration_ms=12,
+    )
+    return {
+        "execution_event": execution_event,
     }
 
 
@@ -192,6 +233,7 @@ def execute_ecosystem_runtime(
     insightflow_observability = _build_insightflow_observability(trace_id=trace_id, pipeline_result=pipeline_result, vijay_validation=vijay_validation)
     gc_validation = _build_gc_validation(vijay_validation=vijay_validation, pipeline_result=pipeline_result)
     mdu_validation = _build_mdu_validation(trace_id=trace_id, pipeline_result=pipeline_result, vijay_validation=vijay_validation)
+    tantra_sdk_contracts = _build_tantra_sdk_contracts(trace_id=trace_id, pipeline_result=pipeline_result, query=query)
 
     payload = {
         "trace_id": trace_id,
@@ -206,6 +248,7 @@ def execute_ecosystem_runtime(
         "insightflow_observability": insightflow_observability,
         "gc_validation": gc_validation,
         "mdu_validation": mdu_validation,
+        "tantra_sdk_contracts": tantra_sdk_contracts,
         "pipeline_summary": {
             "matched_signals": len(pipeline_result.get("matched_signals") or []),
             "rejected_signals": len(pipeline_result.get("rejected_signals") or []),

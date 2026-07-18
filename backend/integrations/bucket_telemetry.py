@@ -44,9 +44,9 @@ class BucketTelemetryClient:
         self.token = os.getenv("UNIGURU_BUCKET_TELEMETRY_TOKEN", "").strip()
         self.timeout_seconds = float(os.getenv("UNIGURU_BUCKET_TELEMETRY_TIMEOUT_SECONDS", "2.0"))
 
-    def emit(self, event: TelemetryEvent) -> None:
+    def emit(self, event: TelemetryEvent) -> bool:
         if not self.enabled or not self.endpoint:
-            return
+            return False
 
         payload = {
             "event": event.event,
@@ -73,6 +73,7 @@ class BucketTelemetryClient:
         )
         try:
             with urllib.request.urlopen(request, timeout=self.timeout_seconds):
-                return
+                return True
         except (urllib.error.URLError, TimeoutError, ValueError) as exc:
             logger.warning("Bucket telemetry emit failed: %s", exc)
+            return False

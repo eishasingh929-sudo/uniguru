@@ -3,11 +3,11 @@
   "event": "ecosystem_runtime_execution",
   "ontology_reference": {
     "domain": "gitas",
-    "trace_id": "ecosystem_mitra_test"
+    "trace_id": "tantra_sdk_runtime_test"
   },
   "query_hash": "b6e4475a17c1c770",
   "route": "TANTRA_ECOSYSTEM",
-  "timestamp": "2026-07-18T08:34:50.094594Z",
-  "trace_id": "ecosystem_mitra_test",
+  "timestamp": "2026-07-18T08:34:43.016135Z",
+  "trace_id": "tantra_sdk_runtime_test",
   "verification_status": "NO_VERIFIED_KNOWLEDGE"
 }
