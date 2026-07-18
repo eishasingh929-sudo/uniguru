@@ -11,6 +11,7 @@
   "backend/tests/test_ecosystem_integration.py::test_ecosystem_replay_endpoint_verifies_stable_cross_service_fields",
   "backend/tests/test_ecosystem_integration.py::test_execute_ecosystem_runtime_emits_evidence",
   "backend/tests/test_ecosystem_integration.py::test_mitra_endpoint_redacts_internal_governance_details",
+  "backend/tests/test_mdu_client.py::test_mdu_client_uses_canonical_dataset_lookup",
   "backend/tests/test_semantic_authority_governance.py::test_authority_pressure_forecast_rejects_legitimacy_accumulation",
   "backend/tests/test_semantic_authority_governance.py::test_contradiction_escalation_preserves_lineage_and_blocks_silent_merge",
   "backend/tests/test_semantic_authority_governance.py::test_distributed_contradiction_arbitration_preserves_unresolved_lineage",

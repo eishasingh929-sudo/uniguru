@@ -15,6 +15,10 @@ if str(ROOT.parent) not in sys.path:
 
 from governance.constitutional_runtime import ConstitutionalCognitionRuntime
 from integrations.bucket_telemetry import BucketTelemetryClient, TelemetryEvent
+from integrations.gc_client import GCClient
+from integrations.insightflow_client import InsightFlowClient
+from integrations.mdu_client import MDUClient
+from integrations.tantra_runtime_client import TantraRuntimeClient
 from integrations.tantra_sdk_adapter import TantraSdkAdapter
 from memory.constitutional_semantic_memory import stable_hash
 
@@ -102,6 +106,10 @@ def _write_json(path: Path, payload: Dict[str, Any]) -> None:
 
 
 _bucket_telemetry_client = BucketTelemetryClient()
+_tantra_runtime_client = TantraRuntimeClient()
+_insightflow_client = InsightFlowClient()
+_gc_client = GCClient()
+_mdu_client = MDUClient()
 _tantra_sdk_adapter = TantraSdkAdapter()
 
 
@@ -146,7 +154,7 @@ def _build_bucket_telemetry(trace_id: str, pipeline_result: Dict[str, Any], proo
 
 def _build_insightflow_observability(trace_id: str, pipeline_result: Dict[str, Any], vijay_validation: Dict[str, Any]) -> Dict[str, Any]:
     trace_hash = stable_hash({"trace_id": trace_id, "verification_status": pipeline_result.get("verification_status"), "runtime_hash": vijay_validation.get("runtime_hash")})
-    return {
+    local_payload = {
         "trace_id": trace_id,
         "trace_complete": True,
         "trace_hash": trace_hash,
@@ -154,16 +162,31 @@ def _build_insightflow_observability(trace_id: str, pipeline_result: Dict[str, A
         "pipeline_status": pipeline_result.get("verification_status"),
         "replay_safe": bool(vijay_validation.get("replay_safe")),
     }
+    live_trace = _insightflow_client.emit_trace(local_payload)
+    live_decision = _insightflow_client.emit_decision({
+        "trace_id": trace_id,
+        "decision": "answer" if str(pipeline_result.get("verification_status") or "").upper() != "NO_VERIFIED_KNOWLEDGE" else "block",
+        "verification_status": pipeline_result.get("verification_status"),
+        "replay_safe": bool(vijay_validation.get("replay_safe")),
+    })
+    local_payload["live_trace"] = live_trace
+    local_payload["live_decision"] = live_decision
+    return local_payload
 
 
 def _build_gc_validation(vijay_validation: Dict[str, Any], pipeline_result: Dict[str, Any]) -> Dict[str, Any]:
     authority_enforced = bool(vijay_validation.get("canonical_authority_granted") is False and pipeline_result.get("output_contract", {}).get("contract_bound"))
-    return {
+    local_payload = {
         "trace_id": vijay_validation.get("trace_id"),
         "authority_enforced": authority_enforced,
         "canonical_authority_granted": bool(vijay_validation.get("canonical_authority_granted")),
         "governance_note": "Constitutional authority remains read-only and enforcement is preserved through replay-safe hashing.",
     }
+    live_authority = _gc_client.validate_authority(local_payload)
+    live_hidden_state = _gc_client.validate_hidden_state({"trace_id": vijay_validation.get("trace_id"), "runtime_hash": vijay_validation.get("runtime_hash")})
+    local_payload["live_authority_validation"] = live_authority
+    local_payload["live_hidden_state_validation"] = live_hidden_state
+    return local_payload
 
 
 def _build_tantra_sdk_contracts(trace_id: str, pipeline_result: Dict[str, Any], query: str) -> Dict[str, Any]:
@@ -175,8 +198,25 @@ def _build_tantra_sdk_contracts(trace_id: str, pipeline_result: Dict[str, Any], 
         domain=(pipeline_result.get("domain_resolution") or {}).get("domain") or "ecosystem",
         duration_ms=12,
     )
+    # Submit to live TANTRA SDK runtime
+    live_execution = _tantra_runtime_client.submit_execution_event(execution_event)
+    live_trace = _tantra_runtime_client.submit_trace({
+        "trace_id": trace_id,
+        "schema_version": execution_event.get("schema_version"),
+        "ownership": execution_event.get("ownership"),
+        "provenance": execution_event.get("provenance"),
+    })
+    live_authority = _tantra_runtime_client.validate_authority({
+        "trace_id": trace_id,
+        "subject_id": execution_event.get("subject_id"),
+        "ownership": execution_event.get("ownership"),
+    })
     return {
         "execution_event": execution_event,
+        "live_execution_submission": live_execution,
+        "live_trace_submission": live_trace,
+        "live_authority_validation": live_authority,
+        "tantra_sdk_live": _tantra_runtime_client.is_live(),
     }
 
 
@@ -205,7 +245,7 @@ def _build_mdu_validation(trace_id: str, pipeline_result: Dict[str, Any], vijay_
         "verification_status": _map_verification_status(pipeline_result.get("verification_status") or "UNVERIFIED"),
     }
     missing_fields = [field for field in required_fields if field not in evidence_payload]
-    return {
+    local_result = {
         "trace_id": trace_id,
         "schema_compatible": not missing_fields,
         "required_fields": required_fields,
@@ -213,6 +253,11 @@ def _build_mdu_validation(trace_id: str, pipeline_result: Dict[str, Any], vijay_
         "evidence_payload": evidence_payload,
         "provenance_continuity": bool(pipeline_result.get("truth_interpretation_link") and pipeline_result.get("semantic_memory")),
     }
+    live_schema = _mdu_client.validate_schema(evidence_payload)
+    live_provenance = _mdu_client.validate_provenance(lineage_payload)
+    local_result["live_schema_validation"] = live_schema
+    local_result["live_provenance_validation"] = live_provenance
+    return local_result
 
 
 def execute_ecosystem_runtime(
@@ -235,6 +280,20 @@ def execute_ecosystem_runtime(
     mdu_validation = _build_mdu_validation(trace_id=trace_id, pipeline_result=pipeline_result, vijay_validation=vijay_validation)
     tantra_sdk_contracts = _build_tantra_sdk_contracts(trace_id=trace_id, pipeline_result=pipeline_result, query=query)
 
+    # Deterministic fields only — live service responses are excluded from the hash
+    # so replay produces a stable execution_hash regardless of live service availability.
+    _deterministic = {
+        "trace_id": trace_id,
+        "query": query,
+        "verification_status": pipeline_result.get("verification_status"),
+        "confidence": (pipeline_result.get("confidence_breakdown") or {}).get("overall"),
+        "answer": pipeline_result.get("answer"),
+        "vijay_runtime_hash": vijay_validation.get("runtime_hash"),
+        "vijay_last_event_hash": vijay_validation.get("last_event_hash"),
+        "tantra_contract_schema": tantra_contract.get("schema"),
+        "mdu_lineage_hash": mdu_validation.get("evidence_payload", {}).get("lineage_hash"),
+        "gc_authority_enforced": gc_validation.get("authority_enforced"),
+    }
     payload = {
         "trace_id": trace_id,
         "query": query,
@@ -255,8 +314,8 @@ def execute_ecosystem_runtime(
             "domain": (pipeline_result.get("domain_resolution") or {}).get("domain"),
             "reasoning_path": pipeline_result.get("reasoning_path"),
         },
+        "execution_hash": stable_hash(_deterministic),
     }
-    payload["execution_hash"] = stable_hash(payload)
 
     if emit_proof:
         _write_json(proof_dir_path / f"ecosystem_execution_{trace_id}.json", payload)

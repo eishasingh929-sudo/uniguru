@@ -1637,6 +1637,162 @@
       "unresolved_thread_opened": true,
       "updated_at": "2026-07-18T08:34:50.078969Z",
       "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "f1c508c573c02fca39b0b503fe53253015f23827adc8ef797cfa8c64411e1a88",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_3934d1e95167",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-18T09:28:16.882474Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "a76dbacfc21bf33ab27cf76230dd1122339146246ba8de211a4b40573b453d48",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_replay_test",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-18T09:28:17.042073Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "a76dbacfc21bf33ab27cf76230dd1122339146246ba8de211a4b40573b453d48",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_replay_test",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-18T09:28:17.199344Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "e03c11bf7901249622d346f7e0033d83908ccf6f98f8dd9357937a32aabb5d1c",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_mitra_test",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-18T09:28:17.398685Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "125fc439089bdd96549ab45ba5fddf5ca111b927db7a2d8bc024e5c6f248f0c1",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "tantra_sdk_runtime_test",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-18T09:30:33.925446Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "7f7a76fbee62e6c5882f29716999a6c9511e441c0fb467f78e8bb5e9b291b589",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_f04c990ab07c",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-18T09:30:34.161937Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "a76dbacfc21bf33ab27cf76230dd1122339146246ba8de211a4b40573b453d48",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_replay_test",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-18T09:30:34.344512Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "a76dbacfc21bf33ab27cf76230dd1122339146246ba8de211a4b40573b453d48",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_replay_test",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-18T09:30:34.520812Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "e03c11bf7901249622d346f7e0033d83908ccf6f98f8dd9357937a32aabb5d1c",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_mitra_test",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-18T09:30:34.704700Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "8a07a332494a57a49607c1bb1e50a4c874b4e94de6496dd0db4f5c43bf39e524",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_419a442c44ea",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-18T13:43:58.628134Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "a76dbacfc21bf33ab27cf76230dd1122339146246ba8de211a4b40573b453d48",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_replay_test",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-18T13:43:58.809171Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "a76dbacfc21bf33ab27cf76230dd1122339146246ba8de211a4b40573b453d48",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_replay_test",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-18T13:43:58.990350Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "e03c11bf7901249622d346f7e0033d83908ccf6f98f8dd9357937a32aabb5d1c",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_mitra_test",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-18T13:43:59.154627Z",
+      "user_id": "ecosystem_runtime"
     }
   ],
   "load_warning": "Previous memory state was unreadable; started observable empty state.",
@@ -2182,6 +2338,26 @@
       "user_id": "ecosystem_runtime",
       "verification_status": "NO_VERIFIED_KNOWLEDGE"
     },
+    "ecosystem_runtime:ecosystem_3934d1e95167": {
+      "contradiction_pressure": 0.0,
+      "query": "What is the Bhagavad Gita?",
+      "rejected_signal_count": 12,
+      "state": "open",
+      "trace_id": "ecosystem_3934d1e95167",
+      "updated_at": "2026-07-18T09:28:16.882474Z",
+      "user_id": "ecosystem_runtime",
+      "verification_status": "NO_VERIFIED_KNOWLEDGE"
+    },
+    "ecosystem_runtime:ecosystem_419a442c44ea": {
+      "contradiction_pressure": 0.0,
+      "query": "What is the Bhagavad Gita?",
+      "rejected_signal_count": 12,
+      "state": "open",
+      "trace_id": "ecosystem_419a442c44ea",
+      "updated_at": "2026-07-18T13:43:58.628134Z",
+      "user_id": "ecosystem_runtime",
+      "verification_status": "NO_VERIFIED_KNOWLEDGE"
+    },
     "ecosystem_runtime:ecosystem_4d31d8c9e207": {
       "contradiction_pressure": 0.0,
       "query": "What is karma in Hindu philosophy?",
@@ -2512,6 +2688,16 @@
       "user_id": "ecosystem_runtime",
       "verification_status": "NO_VERIFIED_KNOWLEDGE"
     },
+    "ecosystem_runtime:ecosystem_f04c990ab07c": {
+      "contradiction_pressure": 0.0,
+      "query": "What is the Bhagavad Gita?",
+      "rejected_signal_count": 12,
+      "state": "open",
+      "trace_id": "ecosystem_f04c990ab07c",
+      "updated_at": "2026-07-18T09:30:34.161937Z",
+      "user_id": "ecosystem_runtime",
+      "verification_status": "NO_VERIFIED_KNOWLEDGE"
+    },
     "ecosystem_runtime:ecosystem_f6dc60568e87": {
       "contradiction_pressure": 0.0,
       "query": "What is the significance of the Ganga river?",
@@ -2538,7 +2724,7 @@
       "rejected_signal_count": 12,
       "state": "open",
       "trace_id": "ecosystem_mitra_test",
-      "updated_at": "2026-07-18T08:34:50.078969Z",
+      "updated_at": "2026-07-18T13:43:59.154627Z",
       "user_id": "ecosystem_runtime",
       "verification_status": "NO_VERIFIED_KNOWLEDGE"
     },
@@ -2548,7 +2734,7 @@
       "rejected_signal_count": 12,
       "state": "open",
       "trace_id": "ecosystem_replay_test",
-      "updated_at": "2026-07-18T08:34:49.859735Z",
+      "updated_at": "2026-07-18T13:43:58.990350Z",
       "user_id": "ecosystem_runtime",
       "verification_status": "NO_VERIFIED_KNOWLEDGE"
     },
@@ -2588,12 +2774,12 @@
       "rejected_signal_count": 12,
       "state": "open",
       "trace_id": "tantra_sdk_runtime_test",
-      "updated_at": "2026-07-18T08:34:43.000512Z",
+      "updated_at": "2026-07-18T09:30:33.925446Z",
       "user_id": "ecosystem_runtime",
       "verification_status": "NO_VERIFIED_KNOWLEDGE"
     }
   },
-  "updated_at": "2026-07-18T08:34:50.078969Z",
+  "updated_at": "2026-07-18T13:43:59.154627Z",
   "users": {
     "anonymous": {
       "continuity_score": 1.0,
@@ -2648,12 +2834,9 @@
     },
     "ecosystem_runtime": {
       "continuity_score": 1.0,
-      "last_seen": "2026-07-18T08:34:50.078969Z",
-      "queries": 62,
+      "last_seen": "2026-07-18T13:43:59.154627Z",
+      "queries": 75,
       "trace_ids": [
-        "ecosystem_dade3b5519e5",
-        "fault_injection_determinism_check",
-        "ecosystem_bafec002a117",
         "ecosystem_f6ffc704c1b3",
         "ecosystem_bcb566ac7e0a",
         "ecosystem_c2e2c1f8ec2b",
@@ -2700,7 +2883,10 @@
         "replay_screenshot_evidence",
         "ecosystem_8fd7a0b3aef0",
         "tantra_sdk_runtime_test",
-        "ecosystem_be6c2debb364"
+        "ecosystem_be6c2debb364",
+        "ecosystem_3934d1e95167",
+        "ecosystem_f04c990ab07c",
+        "ecosystem_419a442c44ea"
       ]
     }
   }
