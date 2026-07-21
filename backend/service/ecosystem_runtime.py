@@ -18,6 +18,7 @@ from integrations.bucket_telemetry import BucketTelemetryClient, TelemetryEvent
 from integrations.gc_client import GCClient
 from integrations.insightflow_client import InsightFlowClient
 from integrations.mdu_client import MDUClient
+from integrations.tantra_ecosystem_bridge import get_tantra_ecosystem_fabric
 from integrations.tantra_runtime_client import TantraRuntimeClient
 from integrations.tantra_sdk_adapter import TantraSdkAdapter
 from memory.constitutional_semantic_memory import stable_hash
@@ -279,6 +280,19 @@ def execute_ecosystem_runtime(
     gc_validation = _build_gc_validation(vijay_validation=vijay_validation, pipeline_result=pipeline_result)
     mdu_validation = _build_mdu_validation(trace_id=trace_id, pipeline_result=pipeline_result, vijay_validation=vijay_validation)
     tantra_sdk_contracts = _build_tantra_sdk_contracts(trace_id=trace_id, pipeline_result=pipeline_result, query=query)
+    
+    # Process event via canonical TANTRA Ecosystem Fabric (InsightCore, InsightBridge, PRANA, KARMA, Replay, Bucket, InsightFlow)
+    tantra_fabric = get_tantra_ecosystem_fabric()
+    tantra_fabric_response = tantra_fabric.process_uniguru_event(
+        query=query,
+        trace_id=trace_id,
+        verification_status=str(pipeline_result.get("verification_status") or "UNVERIFIED").upper(),
+        event_type="UNIGURU_CURRICULUM_QUERY",
+        extra_payload={
+            "domain": (pipeline_result.get("domain_resolution") or {}).get("domain"),
+            "confidence": (pipeline_result.get("confidence_breakdown") or {}).get("overall"),
+        },
+    )
 
     # Deterministic fields only — live service responses are excluded from the hash
     # so replay produces a stable execution_hash regardless of live service availability.
@@ -293,6 +307,8 @@ def execute_ecosystem_runtime(
         "tantra_contract_schema": tantra_contract.get("schema"),
         "mdu_lineage_hash": mdu_validation.get("evidence_payload", {}).get("lineage_hash"),
         "gc_authority_enforced": gc_validation.get("authority_enforced"),
+        "tantra_fabric_status": tantra_fabric_response.get("status"),
+        "prana_verified": tantra_fabric_response.get("prana_verified"),
     }
     payload = {
         "trace_id": trace_id,
@@ -308,6 +324,7 @@ def execute_ecosystem_runtime(
         "gc_validation": gc_validation,
         "mdu_validation": mdu_validation,
         "tantra_sdk_contracts": tantra_sdk_contracts,
+        "tantra_ecosystem_fabric": tantra_fabric_response,
         "pipeline_summary": {
             "matched_signals": len(pipeline_result.get("matched_signals") or []),
             "rejected_signals": len(pipeline_result.get("rejected_signals") or []),

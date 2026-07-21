@@ -1814,7 +1814,7 @@
       "trace_id": "constitutional_contradiction_injection"
     }
   ],
-  "event_count": 505,
+  "event_count": 507,
   "lineage": [
     {
       "classification": "transient",
@@ -5855,15 +5855,31 @@
       "previous_event_hash": "7f7a76fbee62e6c5882f29716999a6c9511e441c0fb467f78e8bb5e9b291b589",
       "retrieval_truth_hash": "fa848f640fbe8acf45114f57c221431f0c8fa496a64b1e099eaa548a50dd7762",
       "trace_id": "ecosystem_419a442c44ea"
+    },
+    {
+      "classification": "transient",
+      "event_hash": "cdc633614aa556e7350235bf33b8a05f9b55263749528f971ae2e68e365174ef",
+      "interpretation_hash": "682be68ca2f4ef0bd151b9d6835e564ac166f521ca79e506d3de9e6cf55e2c90",
+      "previous_event_hash": "8a07a332494a57a49607c1bb1e50a4c874b4e94de6496dd0db4f5c43bf39e524",
+      "retrieval_truth_hash": "521b096edf2d42f3b558084d2345ac6791a7fe6b888bdb49af7bc723f1078a24",
+      "trace_id": "ecosystem_314a53f405b0"
+    },
+    {
+      "classification": "transient",
+      "event_hash": "7672804f70877bfcbef5d162fe1fc02b92ff391cfa531d19db830492f6104897",
+      "interpretation_hash": "b3f636e775dc09b9d8abf479e8eb309a12571130f1453c68a7f7c9bcb3e34084",
+      "previous_event_hash": "cdc633614aa556e7350235bf33b8a05f9b55263749528f971ae2e68e365174ef",
+      "retrieval_truth_hash": "3b31b9fec07ebbf555242eb70f62b33320883ec4428b6b57be810fbdb65a775e",
+      "trace_id": "ecosystem_replay_31fc143dd84a"
     }
   ],
   "replay_integrity": {
     "hash_chain_ok": false,
-    "last_event_hash": "8a07a332494a57a49607c1bb1e50a4c874b4e94de6496dd0db4f5c43bf39e524",
+    "last_event_hash": "7672804f70877bfcbef5d162fe1fc02b92ff391cfa531d19db830492f6104897",
     "rollback_target": null
   },
   "schema": "UNIGURU_CONSTITUTIONAL_SEMANTIC_RECONSTRUCTION_V1",
-  "state_hash": "1a425c3ac420ee8efb46a3e00fa41eb2a1df695a60a66337a3deaee2eedd0733",
+  "state_hash": "2ac69f067682d4820497c5ac090f58378b0e23826bde5536d6ee4288d376a368",
   "transient_memory": [
     {
       "classification": "transient",
@@ -9800,6 +9816,26 @@
         "confidence_below_canonical_floor"
       ],
       "trace_id": "ecosystem_419a442c44ea"
+    },
+    {
+      "classification": "transient",
+      "event_hash": "cdc633614aa556e7350235bf33b8a05f9b55263749528f971ae2e68e365174ef",
+      "reasons": [
+        "verification_status_not_verified",
+        "no_accepted_signals",
+        "confidence_below_canonical_floor"
+      ],
+      "trace_id": "ecosystem_314a53f405b0"
+    },
+    {
+      "classification": "transient",
+      "event_hash": "7672804f70877bfcbef5d162fe1fc02b92ff391cfa531d19db830492f6104897",
+      "reasons": [
+        "verification_status_not_verified",
+        "no_accepted_signals",
+        "confidence_below_canonical_floor"
+      ],
+      "trace_id": "ecosystem_replay_31fc143dd84a"
     }
   ]
 }

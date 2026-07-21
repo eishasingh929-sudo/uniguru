@@ -1793,6 +1793,42 @@
       "unresolved_thread_opened": true,
       "updated_at": "2026-07-18T13:43:59.154627Z",
       "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "cdc633614aa556e7350235bf33b8a05f9b55263749528f971ae2e68e365174ef",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_314a53f405b0",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-21T06:12:28.992809Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "7672804f70877bfcbef5d162fe1fc02b92ff391cfa531d19db830492f6104897",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_replay_31fc143dd84a",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-21T06:12:29.209682Z",
+      "user_id": "ecosystem_runtime"
+    },
+    {
+      "canonical_authority_granted": false,
+      "constitutional_event_hash": "7672804f70877bfcbef5d162fe1fc02b92ff391cfa531d19db830492f6104897",
+      "contradiction_pressure": 0.0,
+      "entities_touched": [],
+      "event": "semantic_memory_update",
+      "memory_classification": "transient",
+      "trace_id": "ecosystem_replay_31fc143dd84a",
+      "unresolved_thread_opened": true,
+      "updated_at": "2026-07-21T06:12:29.341968Z",
+      "user_id": "ecosystem_runtime"
     }
   ],
   "load_warning": "Previous memory state was unreadable; started observable empty state.",
@@ -2308,6 +2344,16 @@
       "user_id": "ecosystem_runtime",
       "verification_status": "NO_VERIFIED_KNOWLEDGE"
     },
+    "ecosystem_runtime:ecosystem_314a53f405b0": {
+      "contradiction_pressure": 0.0,
+      "query": "What is drip irrigation?",
+      "rejected_signal_count": 12,
+      "state": "open",
+      "trace_id": "ecosystem_314a53f405b0",
+      "updated_at": "2026-07-21T06:12:28.992809Z",
+      "user_id": "ecosystem_runtime",
+      "verification_status": "NO_VERIFIED_KNOWLEDGE"
+    },
     "ecosystem_runtime:ecosystem_3386b74163b4": {
       "contradiction_pressure": 0.0,
       "query": "What is jnana yoga?",
@@ -2728,6 +2774,16 @@
       "user_id": "ecosystem_runtime",
       "verification_status": "NO_VERIFIED_KNOWLEDGE"
     },
+    "ecosystem_runtime:ecosystem_replay_31fc143dd84a": {
+      "contradiction_pressure": 0.0,
+      "query": "What is drip irrigation?",
+      "rejected_signal_count": 12,
+      "state": "open",
+      "trace_id": "ecosystem_replay_31fc143dd84a",
+      "updated_at": "2026-07-21T06:12:29.341968Z",
+      "user_id": "ecosystem_runtime",
+      "verification_status": "NO_VERIFIED_KNOWLEDGE"
+    },
     "ecosystem_runtime:ecosystem_replay_test": {
       "contradiction_pressure": 0.0,
       "query": "What is the Bhagavad Gita?",
@@ -2779,7 +2835,7 @@
       "verification_status": "NO_VERIFIED_KNOWLEDGE"
     }
   },
-  "updated_at": "2026-07-18T13:43:59.154627Z",
+  "updated_at": "2026-07-21T06:12:29.341968Z",
   "users": {
     "anonymous": {
       "continuity_score": 1.0,
@@ -2834,11 +2890,9 @@
     },
     "ecosystem_runtime": {
       "continuity_score": 1.0,
-      "last_seen": "2026-07-18T13:43:59.154627Z",
-      "queries": 75,
+      "last_seen": "2026-07-21T06:12:29.341968Z",
+      "queries": 78,
       "trace_ids": [
-        "ecosystem_f6ffc704c1b3",
-        "ecosystem_bcb566ac7e0a",
         "ecosystem_c2e2c1f8ec2b",
         "ecosystem_df9b8492a5be",
         "ecosystem_71c07fc29303",
@@ -2886,7 +2940,9 @@
         "ecosystem_be6c2debb364",
         "ecosystem_3934d1e95167",
         "ecosystem_f04c990ab07c",
-        "ecosystem_419a442c44ea"
+        "ecosystem_419a442c44ea",
+        "ecosystem_314a53f405b0",
+        "ecosystem_replay_31fc143dd84a"
       ]
     }
   }
